@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>How It Works | LUMINA INTERIORS</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#c4c7c7",
+                    "on-background": "#e5e2e1",
+                    "primary-fixed-dim": "#c9c6c5",
+                    "on-error-container": "#ffdad6",
+                    "on-primary-container": "#7b7979",
+                    "secondary": "#ffd65b",
+                    "surface-variant": "#353434",
+                    "error": "#ffb4ab",
+                    "on-surface": "#e5e2e1",
+                    "tertiary-container": "#0b0a09",
+                    "on-primary": "#313030",
+                    "tertiary-fixed": "#e6e1df",
+                    "surface-container-high": "#2b2a2a",
+                    "inverse-surface": "#e5e2e1",
+                    "secondary-container": "#e7b900",
+                    "surface-container": "#201f1f",
+                    "primary": "#c9c6c5",
+                    "surface-bright": "#3a3939",
+                    "secondary-fixed-dim": "#f0c110",
+                    "error-container": "#93000a",
+                    "on-error": "#690005",
+                    "on-tertiary-fixed": "#1d1b1a",
+                    "on-secondary-fixed": "#241a00",
+                    "primary-container": "#0a0a0a",
+                    "surface-dim": "#141313",
+                    "tertiary-fixed-dim": "#cac6c3",
+                    "surface": "#141313",
+                    "outline-variant": "#444748",
+                    "on-tertiary-container": "#7c7977",
+                    "on-primary-fixed": "#1c1b1b",
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface-container-highest": "#353434",
+                    "inverse-primary": "#5f5e5e",
+                    "inverse-on-surface": "#313030",
+                    "on-secondary-container": "#5f4a00",
+                    "on-secondary-fixed-variant": "#584400",
+                    "tertiary": "#cac6c3",
+                    "primary-fixed": "#e5e2e1",
+                    "on-tertiary-fixed-variant": "#484645",
+                    "outline": "#8e9192",
+                    "secondary-fixed": "#ffe08b",
+                    "surface-tint": "#c9c6c5",
+                    "background": "#141313",
+                    "on-tertiary": "#32302f",
+                    "on-primary-fixed-variant": "#474646",
+                    "on-secondary": "#3d2f00",
+                    "surface-container-low": "#1c1b1b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "element-gap": "24px",
+                    "section-gap": "80px",
+                    "unit": "4px",
+                    "container-padding": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Playfair Display"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Playfair Display"],
+                    "display-xl": ["Playfair Display"],
+                    "label-caps": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "ghost-text": ["Playfair Display"]
+            },
+            "fontSize": {
+                    "headline-md": ["28px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["40px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                    "display-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "300"}],
+                    "ghost-text": ["120px", {"lineHeight": "1", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0A0A0A;
+            background-image: linear-gradient(#1A1A1A 1px, transparent 1px), linear-gradient(90deg, #1A1A1A 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .timeline-line {
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, #ffd65b, #ffd65b, transparent);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 100%;
+        }
+        .shimmer-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+        .ripple {
+            animation: ripple-pulse 2s infinite;
+        }
+        @keyframes ripple-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 214, 91, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(255, 214, 91, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 214, 91, 0); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-on-background selection:bg-secondary selection:text-on-secondary">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full flex justify-between items-center px-6 py-4 bg-black/90 backdrop-blur-lg border-b border-zinc-800 shadow-[0_0_15px_rgba(245,197,24,0.05)] z-50">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-yellow-500 cursor-pointer" data-icon="menu">menu</span>
+<span class="text-2xl font-black tracking-tighter text-white font-headline-md uppercase">LUMINA</span>
+</div>
+<nav class="hidden md:flex gap-8 items-center">
+<a class="font-serif text-xs tracking-widest text-zinc-400 hover:text-yellow-400 transition-colors duration-300" href="#">ABOUT US</a>
+<a class="font-serif text-xs tracking-widest text-zinc-400 hover:text-yellow-400 transition-colors duration-300" href="#">SERVICES</a>
+<a class="font-serif text-xs tracking-widest text-zinc-400 hover:text-yellow-400 transition-colors duration-300" href="#">PORTFOLIO</a>
+<a class="font-serif text-xs tracking-widest text-yellow-500 border-b-2 border-yellow-500" href="#">HOW IT WORKS</a>
+</nav>
+<button class="font-serif uppercase tracking-widest text-sm text-yellow-500 hover:text-yellow-400 transition-colors duration-300 border border-yellow-500/30 px-6 py-2">GET FREE ESTIMATE</button>
+</header>
+<main class="pt-32 pb-20">
+<!-- Hero Section -->
+<section class="max-w-7xl mx-auto px-gutter mb-section-gap text-center">
+<p class="font-label-caps text-secondary mb-4">THE ARCHITECTURAL JOURNEY</p>
+<h1 class="font-display-xl text-on-background mb-8">Crafting Your Vision into <br/> <span class="italic text-secondary">Spatial Reality.</span></h1>
+<p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto">From the initial spark of inspiration to the final architectural reveal, our process is defined by meticulous precision and artisanal care.</p>
+</section>
+<!-- Video Section -->
+<section class="max-w-7xl mx-auto px-gutter mb-section-gap">
+<div class="relative w-full aspect-video bg-surface-container overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="cinematic wide shot of a luxury minimalist living room with floor-to-ceiling windows and marble accents during sunset" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC6C8dLXXENNsHBvdKXs0oAMBaybGDZlUChJEdC90xRu0_4d0AUIahjRv29DeCnV4AhHBLME5b94uJ5pa543ahhUP71MH9y5I_6mVzrPs4D4HxYC6_iM8pK0KNrUH4EDIlCf_VilFD55kc5IzYEgN1nhbqOEZexqhn-URAgrDyB0owrsoU0onWe3zo3nH40AYqynvYzsqBbfisrGWERIEUuhsHzwoTHbiytUNfrlLCRopBtT0lV7xZvnph46PeGlkSut4KkAOR49w')">
+</div>
+<div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+<button class="ripple w-24 h-24 rounded-full bg-secondary text-on-secondary flex items-center justify-center transition-transform duration-300 hover:scale-110">
+<span class="material-symbols-outlined text-4xl" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<div class="absolute bottom-10 left-10">
+<h3 class="font-headline-md text-white">THE LUMINA EXPERIENCE</h3>
+<p class="font-label-caps text-secondary">A BEHIND-THE-SCENES LOOK (2:45)</p>
+</div>
+</div>
+</section>
+<!-- Timeline Section -->
+<section class="relative max-w-7xl mx-auto px-gutter py-section-gap overflow-hidden">
+<div class="timeline-line hidden md:block"></div>
+<div class="space-y-40">
+<!-- Step 01 -->
+<div class="relative flex flex-col md:flex-row items-center gap-12">
+<div class="md:w-1/2 md:text-right">
+<span class="font-ghost-text text-zinc-900 absolute -top-16 -left-4 md:relative md:top-auto md:left-auto block">01</span>
+<h2 class="font-headline-lg text-on-background mb-4">Discovery Call</h2>
+<p class="font-body-md text-on-surface-variant">We begin with an intimate dialogue to understand your lifestyle, aesthetic leanings, and the functional requirements of your future space.</p>
+</div>
+<div class="relative z-10 w-12 h-12 bg-secondary rounded-full border-4 border-black flex-shrink-0 hidden md:flex items-center justify-center">
+<span class="material-symbols-outlined text-black text-sm" data-icon="call">call</span>
+</div>
+<div class="md:w-1/2">
+<div class="h-64 w-full bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" data-alt="designer and client discussing plans over high-end material samples in a bright professional studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNx20gOzqLwIV_ownCgtp3gp0danY6MbbLIzoQjibAO_cxZ-T3V8YPMUWyDgRTq5O_ffArC7v5QmrGxjaLkaKDebMhqE-CLE6x-Sf-wMJ0BX_Jl616XMnf3ga-KKsrevyG4h2r35Nrk0qtlyOsVPSOwLl0Y579jmsdYjffbJdHD47k-5ZW8bGflKOsoolaZCoGsyS0L2dLctvlANsLuwgYwrjcsCazuJX1YCQn07DvIAhMxUyMkTzkC3VW-aM89911dGjrLHse9w"/>
+</div>
+</div>
+</div>
+<!-- Step 02 -->
+<div class="relative flex flex-col md:flex-row-reverse items-center gap-12">
+<div class="md:w-1/2 md:text-left">
+<span class="font-ghost-text text-zinc-900 absolute -top-16 -right-4 md:relative md:top-auto md:right-auto block">02</span>
+<h2 class="font-headline-lg text-on-background mb-4">Architectural Planning</h2>
+<p class="font-body-md text-on-surface-variant">Our architects draft precision floor plans and 3D elevations, optimizing spatial flow and natural lighting for your specific site.</p>
+</div>
+<div class="relative z-10 w-12 h-12 bg-secondary rounded-full border-4 border-black flex-shrink-0 hidden md:flex items-center justify-center">
+<span class="material-symbols-outlined text-black text-sm" data-icon="architecture">architecture</span>
+</div>
+<div class="md:w-1/2">
+<div class="h-64 w-full bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" data-alt="overhead view of detailed architectural blueprints with a drafting compass and sleek designer pens" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWvfy2LiiXrWwJxrcrVVpvMFWjB3Vhj2WfuiImZZT8ZSwpuIaduXLIkZS9vfy53ZFGfDfUm1EQr8qaiGuYTH-catRoN1P-viUCY8g3oTgQbg7rL2sPKhuWl2UbLh3HA1xz-PdVFdekhjcjNv6-yh8v6FONHnVAfx7lEB5vqfxU6qFPbrBwjBZuLtxjjrQe3LaKdmGiFGw73IO3clVEMI8FsepYik6T6PRHUPYtaO3IKb1tdVHPPNkipuwO_R56c_GEQyCXUsusfQ"/>
+</div>
+</div>
+</div>
+<!-- Step 03 -->
+<div class="relative flex flex-col md:flex-row items-center gap-12">
+<div class="md:w-1/2 md:text-right">
+<span class="font-ghost-text text-zinc-900 absolute -top-16 -left-4 md:relative md:top-auto md:left-auto block">03</span>
+<h2 class="font-headline-lg text-on-background mb-4">Material Selection</h2>
+<p class="font-body-md text-on-surface-variant">Curating a tactile palette of rare marbles, sustainable hardwoods, and bespoke textiles sourced from global artisans.</p>
+</div>
+<div class="relative z-10 w-12 h-12 bg-secondary rounded-full border-4 border-black flex-shrink-0 hidden md:flex items-center justify-center">
+<span class="material-symbols-outlined text-black text-sm" data-icon="diamond">diamond</span>
+</div>
+<div class="md:w-1/2">
+<div class="h-64 w-full bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" data-alt="mood board featuring dark marble swatches, brass accents, and deep charcoal velvet fabric samples" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7QnpJ36ba_94C6zF0oQLsT5Cp4T0LVefBtQOq6Y1uHNfYQ0DmvKIVsur-ZjGEuzPqoC0XmINJQU7POyvM1WrNYSLUrwjQeodr2jP4XTbwBDKu_bpXVmVFCz6-Y8hipsgV57IAKe8_A5BJI2QO-vGe5_5yMtZ9pC9TBgKO47mvypvzfmfFbgBjczY9RUN88aka0SBgnikKuNhoyGt0LsMhMyY8betqgmW-KCrDX_RYxArwFt9wpSk2As_b74DOeCfw3VZjg-iCsQ"/>
+</div>
+</div>
+</div>
+<!-- Step 04 -->
+<div class="relative flex flex-col md:flex-row-reverse items-center gap-12">
+<div class="md:w-1/2 md:text-left">
+<span class="font-ghost-text text-zinc-900 absolute -top-16 -right-4 md:relative md:top-auto md:right-auto block">04</span>
+<h2 class="font-headline-lg text-on-background mb-4">White-Glove Build</h2>
+<p class="font-body-md text-on-surface-variant">Our vetted craftsmen execute the vision with obsessive attention to detail, maintaining a clean, professional site throughout.</p>
+</div>
+<div class="relative z-10 w-12 h-12 bg-secondary rounded-full border-4 border-black flex-shrink-0 hidden md:flex items-center justify-center">
+<span class="material-symbols-outlined text-black text-sm" data-icon="construction">construction</span>
+</div>
+<div class="md:w-1/2">
+<div class="h-64 w-full bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" data-alt="craftsman installing custom wood paneling on a wall with extreme precision in a modern luxury home" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB--b4SgdSf2qxnedWOHOY7mc5vIVPxk7Q92aAVNAoCfGiYptnTNomO8nPoDlqjNquQklWCyNOjtvroZJ7y0yvdfToa7x5dk1oD0fE5JhRHjYrfKvYbPYvgDr7ywJfiE5HjFpJn93Lddq4QcQLB0c1XexqpILaDPJuUv1oMffSLX6PFi6MlB2HO561UMGJ9xy454m63Bdx4dgnJC4BXApcF8OhSciRje5o9khFcLckcqovDTbE-ikyGpGwHPRc3mzoRNTIkV-NINQ"/>
+</div>
+</div>
+</div>
+<!-- Step 05 -->
+<div class="relative flex flex-col md:flex-row items-center gap-12">
+<div class="md:w-1/2 md:text-right">
+<span class="font-ghost-text text-zinc-900 absolute -top-16 -left-4 md:relative md:top-auto md:left-auto block">05</span>
+<h2 class="font-headline-lg text-on-background mb-4">Bespoke Curation</h2>
+<p class="font-body-md text-on-surface-variant">Procuring unique art pieces and custom furniture that infuse the space with your personal narrative and character.</p>
+</div>
+<div class="relative z-10 w-12 h-12 bg-secondary rounded-full border-4 border-black flex-shrink-0 hidden md:flex items-center justify-center">
+<span class="material-symbols-outlined text-black text-sm" data-icon="palette">palette</span>
+</div>
+<div class="md:w-1/2">
+<div class="h-64 w-full bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" data-alt="sophisticated art gallery wall in a luxury apartment with accent lighting on abstract paintings" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLsJTfzuMZPUf70aWUK9ySWbdBiAFlk0QEDkkRiVsKeWC9QgaQjzANq6htID2mjjreUmIYNlo9avaJh_Dx10Fp3SEVHnRjtoefre678oRD2k6RL0J3XXn_85LiZmly4GWgc5MJiS464UiIQNkNzBZnwb181nK052z05bjxNfKHWvgEnDwkR5P0kDPBC6rqU9RcTUomGaZYdaz4obb7lzvcypnTk1il5ZfL00Bvjy43AjMUeORFkCGEFAsAYu7ERyM5_Syfx6kN7w"/>
+</div>
+</div>
+</div>
+<!-- Step 06 -->
+<div class="relative flex flex-col md:flex-row-reverse items-center gap-12">
+<div class="md:w-1/2 md:text-left">
+<span class="font-ghost-text text-zinc-900 absolute -top-16 -right-4 md:relative md:top-auto md:right-auto block">06</span>
+<h2 class="font-headline-lg text-on-background mb-4">The Grand Reveal</h2>
+<p class="font-body-md text-on-surface-variant">Final walkthrough and handover of your sanctuary, complete with a customized maintenance guide for your materials.</p>
+</div>
+<div class="relative z-10 w-12 h-12 bg-secondary rounded-full border-4 border-black flex-shrink-0 hidden md:flex items-center justify-center">
+<span class="material-symbols-outlined text-black text-sm" data-icon="key">key</span>
+</div>
+<div class="md:w-1/2">
+<div class="h-64 w-full bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover transition-transform duration-700 hover:scale-110" data-alt="finished luxury dining room with designer lighting and a large window overlooking a city skyline" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGn5dqnImu_HmRC9WSbhGL8wWwvlKIajwmHxQNnArvNlN4HjtnkvOHSCTFogYQBBmdrM__rOwbNa6FBZMq9ntoan3b-x-Mq2_zNxIm6k80ZbL2FQ_5810WQEjd7KB7Ge0LE1nafQJfWyiZoFp7opIfRjJ_glLTS5tZb5waO9GiMm0p_L-WfYXrE9kgOYsFzKezyXz5eK_gMSFE3tZdvRpE4Ll6JMQQABsad2CxG1gxevxpWDLNK7kmp0_T57hlRFTZvNpoenY7hQ"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="max-w-4xl mx-auto px-gutter my-section-gap">
+<h2 class="font-headline-lg text-center mb-16">Frequently Asked Questions</h2>
+<div class="space-y-4">
+<div class="bg-surface-container border-l-4 border-secondary p-6 group cursor-pointer">
+<div class="flex justify-between items-center">
+<h4 class="font-headline-md text-lg">How long does a typical project take?</h4>
+<span class="material-symbols-outlined transition-transform duration-300 group-hover:rotate-180" data-icon="expand_more">expand_more</span>
+</div>
+<div class="mt-4 text-on-surface-variant font-body-md">
+                        Timelines vary based on scope, but a full residential renovation typically spans 4 to 8 months from discovery to reveal.
+                    </div>
+</div>
+<div class="bg-surface-container border-l-4 border-zinc-800 hover:border-secondary p-6 group cursor-pointer transition-colors duration-300">
+<div class="flex justify-between items-center">
+<h4 class="font-headline-md text-lg">Do you work internationally?</h4>
+<span class="material-symbols-outlined transition-transform duration-300 group-hover:rotate-180" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="bg-surface-container border-l-4 border-zinc-800 hover:border-secondary p-6 group cursor-pointer transition-colors duration-300">
+<div class="flex justify-between items-center">
+<h4 class="font-headline-md text-lg">What is your design fee structure?</h4>
+<span class="material-symbols-outlined transition-transform duration-300 group-hover:rotate-180" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="bg-surface-container border-l-4 border-zinc-800 hover:border-secondary p-6 group cursor-pointer transition-colors duration-300">
+<div class="flex justify-between items-center">
+<h4 class="font-headline-md text-lg">Can I use my existing furniture?</h4>
+<span class="material-symbols-outlined transition-transform duration-300 group-hover:rotate-180" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="max-w-7xl mx-auto px-gutter my-section-gap">
+<div class="bg-zinc-900 p-20 text-center relative overflow-hidden">
+<div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 50% 50%, #ffd65b 0%, transparent 70%);"></div>
+<h2 class="font-display-xl text-white mb-8 relative z-10">Ready to redefine your <br/> space?</h2>
+<button class="shimmer-btn bg-secondary text-black px-12 py-5 font-label-caps tracking-[0.3em] hover:shadow-[0_0_30px_rgba(245,197,24,0.4)] transition-all duration-500 relative z-10">
+                    START YOUR PROJECT
+                </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full flex flex-col items-center gap-8 px-10 py-20 bg-[#0A0A0A] border-t border-zinc-900">
+<div class="text-yellow-500 font-black text-xl tracking-widest font-headline-md">LUMINA INTERIORS</div>
+<div class="flex gap-12">
+<a class="font-serif text-xs tracking-widest text-zinc-600 hover:text-yellow-400 hover:shadow-[0_0_10px_rgba(245,197,24,0.3)] transition-all duration-300" href="#">PRIVACY POLICY</a>
+<a class="font-serif text-xs tracking-widest text-zinc-600 hover:text-yellow-400 hover:shadow-[0_0_10px_rgba(245,197,24,0.3)] transition-all duration-300" href="#">TERMS OF SERVICE</a>
+<a class="font-serif text-xs tracking-widest text-zinc-600 hover:text-yellow-400 hover:shadow-[0_0_10px_rgba(245,197,24,0.3)] transition-all duration-300" href="#">FAQ</a>
+</div>
+<p class="font-serif text-xs tracking-widest text-zinc-500 text-center">© 2024 LUMINA INTERIORS. CRAFTING ARCHITECTURAL EXCELLENCE.</p>
+</footer>
+</body></html>

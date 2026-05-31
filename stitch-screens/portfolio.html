@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&amp;family=Inter:wght@300;400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #0A0A0A;
+            background-image: linear-gradient(#1A1A1A 1px, transparent 1px), linear-gradient(90deg, #1A1A1A 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #F5C518;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            box-shadow: 0 0 10px rgba(245, 197, 24, 0.3);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#c4c7c7",
+                      "on-background": "#e5e2e1",
+                      "primary-fixed-dim": "#c9c6c5",
+                      "on-error-container": "#ffdad6",
+                      "on-primary-container": "#7b7979",
+                      "secondary": "#ffd65b",
+                      "surface-variant": "#353434",
+                      "error": "#ffb4ab",
+                      "on-surface": "#e5e2e1",
+                      "tertiary-container": "#0b0a09",
+                      "on-primary": "#313030",
+                      "tertiary-fixed": "#e6e1df",
+                      "surface-container-high": "#2b2a2a",
+                      "inverse-surface": "#e5e2e1",
+                      "secondary-container": "#e7b900",
+                      "surface-container": "#201f1f",
+                      "primary": "#c9c6c5",
+                      "surface-bright": "#3a3939",
+                      "secondary-fixed-dim": "#f0c110",
+                      "error-container": "#93000a",
+                      "on-error": "#690005",
+                      "on-tertiary-fixed": "#1d1b1a",
+                      "on-secondary-fixed": "#241a00",
+                      "primary-container": "#0a0a0a",
+                      "surface-dim": "#141313",
+                      "tertiary-fixed-dim": "#cac6c3",
+                      "surface": "#141313",
+                      "outline-variant": "#444748",
+                      "on-tertiary-container": "#7c7977",
+                      "on-primary-fixed": "#1c1b1b",
+                      "surface-container-lowest": "#0e0e0e",
+                      "surface-container-highest": "#353434",
+                      "inverse-primary": "#5f5e5e",
+                      "inverse-on-surface": "#313030",
+                      "on-secondary-container": "#5f4a00",
+                      "on-secondary-fixed-variant": "#584400",
+                      "tertiary": "#cac6c3",
+                      "primary-fixed": "#e5e2e1",
+                      "on-tertiary-fixed-variant": "#484645",
+                      "outline": "#8e9192",
+                      "secondary-fixed": "#ffe08b",
+                      "surface-tint": "#c9c6c5",
+                      "background": "#141313",
+                      "on-tertiary": "#32302f",
+                      "on-primary-fixed-variant": "#474646",
+                      "on-secondary": "#3d2f00",
+                      "surface-container-low": "#1c1b1b"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "16px",
+                      "element-gap": "24px",
+                      "section-gap": "80px",
+                      "unit": "4px",
+                      "container-padding": "24px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Playfair Display"],
+                      "body-md": ["Inter"],
+                      "headline-lg": ["Playfair Display"],
+                      "display-xl": ["Playfair Display"],
+                      "label-caps": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "ghost-text": ["Playfair Display"]
+              },
+              "fontSize": {
+                      "headline-md": ["28px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "headline-lg": ["40px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                      "display-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                      "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "300"}],
+                      "ghost-text": ["120px", {"lineHeight": "1", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background selection:bg-secondary selection:text-on-secondary overflow-x-hidden">
+<!-- Top Navigation Shell -->
+<nav class="fixed top-0 w-full flex justify-between items-center px-6 py-4 bg-black/90 backdrop-blur-lg z-50 border-b border-zinc-800 shadow-[0_0_15px_rgba(245,197,24,0.05)]">
+<div class="text-2xl font-black tracking-tighter text-white">LUMINA</div>
+<div class="hidden md:flex items-center gap-10">
+<a class="font-serif uppercase tracking-widest text-sm text-zinc-400 hover:text-yellow-400 transition-colors duration-300" href="#">About Us</a>
+<a class="font-serif uppercase tracking-widest text-sm text-zinc-400 hover:text-yellow-400 transition-colors duration-300" href="#">Services</a>
+<a class="font-serif uppercase tracking-widest text-sm text-yellow-500 border-b-2 border-yellow-500" href="#">Portfolio</a>
+<a class="font-serif uppercase tracking-widest text-sm text-zinc-400 hover:text-yellow-400 transition-colors duration-300" href="#">Team</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="hidden lg:block font-serif uppercase tracking-widest text-sm text-yellow-500 scale-95 active:scale-90 transition-all duration-300">GET FREE ESTIMATE</button>
+<span class="material-symbols-outlined text-white cursor-pointer" data-icon="menu">menu</span>
+</div>
+</nav>
+<main class="relative">
+<!-- Hero Section -->
+<section class="relative min-h-[618px] flex flex-col justify-center items-center px-6 pt-32 pb-20 text-center overflow-hidden">
+<div class="absolute inset-0 flex items-center justify-center opacity-5 select-none pointer-events-none">
+<h2 class="font-ghost-text text-ghost-text text-white tracking-[0.2em]">PORTFOLIO</h2>
+</div>
+<h1 class="font-display-xl text-display-xl text-white mb-6 relative z-10">Curated Masterpieces</h1>
+<p class="font-body-lg text-body-lg text-zinc-400 max-w-2xl mx-auto mb-12 relative z-10">
+                A definitive collection of architectural precision and artisanal elegance, crafted for the most discerning eye.
+            </p>
+<!-- Filter Tabs -->
+<div class="flex flex-wrap justify-center gap-4 relative z-10 px-4">
+<button class="bg-secondary text-on-secondary px-8 py-3 rounded-full font-label-caps text-label-caps transition-all duration-300 hover:shadow-[0_0_20px_rgba(245,197,24,0.4)]">ALL WORKS</button>
+<button class="border border-zinc-700 text-zinc-400 px-8 py-3 rounded-full font-label-caps text-label-caps hover:border-secondary hover:text-secondary transition-all duration-300">RESIDENTIAL</button>
+<button class="border border-zinc-700 text-zinc-400 px-8 py-3 rounded-full font-label-caps text-label-caps hover:border-secondary hover:text-secondary transition-all duration-300">LUXURY ESTATE</button>
+<button class="border border-zinc-700 text-zinc-400 px-8 py-3 rounded-full font-label-caps text-label-caps hover:border-secondary hover:text-secondary transition-all duration-300">BOUTIQUE COMMERCIAL</button>
+</div>
+</section>
+<!-- Featured Spotlight Carousel-style Card -->
+<section class="px-6 md:px-20 mb-section-gap">
+<div class="relative group max-w-7xl mx-auto border-[1px] border-zinc-800 p-2 md:p-6">
+<!-- Yellow Frame Border Animated Effect Simulation -->
+<div class="absolute -inset-1 border border-secondary opacity-20 pointer-events-none group-hover:opacity-100 transition-opacity duration-700"></div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-surface-container-lowest p-8">
+<div class="relative aspect-square overflow-hidden">
+<img alt="Featured Project" class="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110" data-alt="ultra-luxury minimalist living room with high ceilings, marble floors, and floor-to-ceiling windows overlooking a sunset city skyline" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgMEC03jPE7dtZB5bYdMerob7fIs6jIgGfbGf4K9pmsuw-qB3z19OkSFSdbhxNSikkVXXAfyWMmKbgSsLZm8FRrbEmbGecWHITliigzfWKIpZ7fBeRqXFX6VdLA30dlwNTagVO8ox4JKlzFNMdF6yf0rLWKEC9gM5_s47WuWqEaga0IVjJ6R_zVvkZQ1QC2gWMzZUxMVc3C0NFj-LUj75fLIDh1yagpVZjkNZ07Zoh0YkTgY3OJNGriXHnhjrjJwGexbdDM73Y0A"/>
+</div>
+<div class="space-y-6">
+<span class="font-label-caps text-label-caps text-secondary">SPOTLIGHT PROJECT</span>
+<h3 class="font-headline-lg text-headline-lg text-white">THE AMBERLEY RESIDENCE</h3>
+<p class="font-body-md text-body-md text-zinc-500">
+                            An exploration of light and shadow in a 12,000 sq ft modernist estate. Utilizing raw concrete, warm oak, and bespoke brass accents to create a sanctuary of quiet luxury.
+                        </p>
+<div class="pt-6">
+<button class="border-b-2 border-secondary pb-1 font-label-caps text-label-caps text-white hover:text-secondary transition-colors">EXPLORE CASE STUDY</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Masonry Grid -->
+<section class="px-6 md:px-12 mb-section-gap max-w-[1600px] mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1 (Large) -->
+<div class="relative group overflow-hidden border border-zinc-800 aspect-[4/5] lg:row-span-2">
+<img alt="Project One" class="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110" data-alt="contemporary dining area with a massive black oak table, sculptural chandelier, and minimalist art piece on a textured grey wall" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwRq0UvS8_MJ-z8u-_DdLJ3UrKw4ay0VgrcLY8y7ZZRP0DSwCiXFiaGOgikWpWpMsz44XWtBP6WgfjDhyAyi6u6VNgE_IQSx09oiTDRDgxvU5Rx5_WQvlL0FE6oaUr0oA3KK1KCj8l990vEw_UD9vZAQgiWWlzXfBLgGfpEIWuB5KILp_JmogfhvFOb70AyoqrSBZEa5MJbJWiXNhOuiAU9-pNBPWRp8y-3OOKKxWOfYhnzL0HncQ3WhH04TjWBlO-jGKms2HWEA"/>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-10">
+<span class="font-label-caps text-label-caps text-secondary mb-2">LUXURY ESTATE</span>
+<h4 class="font-headline-md text-headline-md text-white">The Onyx Suite</h4>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="relative group overflow-hidden border border-zinc-800 aspect-square">
+<img alt="Project Two" class="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110" data-alt="luxury bathroom with dark stone tiles, a freestanding copper bathtub, and ambient recessed lighting creating a moody spa atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqFOYxFz6uQd7xxzD0amNBASMqL3iQtUNrXL_LPJG6x1F5ZMg8gOc4bd3dPDNhZK7FV1dwLIKnsIfNbr4L8tCD_9zstJFqajeL_E6vu-qZtRkC_k3LKAORVvkIdk19IF6BN9KosL17w_91m8kpw8RCKXo3ApXQD8sduWJjPnFyIP7lNafqGqJaBzj0ZGAOXeuV7f8-aVSFe9Bl5rD5Nb2YoHs1uu_t6_LAy8IvfIJI08vYAhkQLS8CNqW_JyRdEB-rUPog2JyyFA"/>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+<span class="font-label-caps text-label-caps text-secondary mb-2">RESIDENTIAL</span>
+<h4 class="font-headline-md text-headline-md text-white">Azure Spa Loft</h4>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="relative group overflow-hidden border border-zinc-800 aspect-square lg:translate-y-12">
+<img alt="Project Three" class="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110" data-alt="sleek modern kitchen with matte black cabinetry, marble island, and high-end built-in appliances under warm pendant lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_Rbg49Q1U9sTonePVEmtf8CMz_BgMxEQy4xX3KFK0X8shaxZvxnqWCeP6Q9fiO5pZNH5JQJDQ8AFPe2dqOopqtxlag-q19RqprU7LLMnncLnkx8hgPGXXKlah58QlZT1axab_GF0OBS2VaRlZ5TFzjuOvWv18MNQQs6sU7Z6TD8DlA68tOERL1zTYYrogU2ttf-6kJ_D4DDXLPBOqI19KAn4f25SJAR9lnXGUeDf851s0ZZXeDwa82zmfV1aOSmBSCQfC2emDHw"/>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+<span class="font-label-caps text-label-caps text-secondary mb-2">COMMERCIAL</span>
+<h4 class="font-headline-md text-headline-md text-white">Culinary Studio</h4>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="relative group overflow-hidden border border-zinc-800 aspect-square">
+<img alt="Project Four" class="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110" data-alt="minimalist bedroom with soft grey linens, floating nightstands, and a large abstract painting above the headboard in soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAPlCF7GTAG2fFnC5hPdZFilk_fDqhKQQvzm_MXSHXYnK_jKnLXz99Ez6fvGtMUbB0oJ5pWsnyQy6G07n3vj4sity7YiDfU-GPWRManL4tbdFyYANYbUhn9fo_jMkaS9Wpy_V0kjtPFzdWiY7CFXFfepQqU8_Les08Vm9fZPVs3kCBYo9LzfBQ-HVPUiI6zkWPKrRuOzsMHNMe_v3oIeO9OB8FVpJrI81tP5r9Xy73lotpE6d0n5OPg9KirOVCnFdamWWzUkpd1Q"/>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+<span class="font-label-caps text-label-caps text-secondary mb-2">RESIDENTIAL</span>
+<h4 class="font-headline-md text-headline-md text-white">The Serene Bedroom</h4>
+</div>
+</div>
+<!-- Card 5 (Horizontal) -->
+<div class="relative group overflow-hidden border border-zinc-800 aspect-[16/9] lg:col-span-2 lg:translate-y-12">
+<img alt="Project Five" class="w-full h-full object-cover transition-transform duration-[1500ms] group-hover:scale-110" data-alt="expansive rooftop lounge with contemporary outdoor furniture, a linear fire pit, and panoramic views of a lush tropical garden" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuO7xKnpmLo28yDljw54dsbe_t7_4Y7RwT35bYiaohfaGTCFiaKAfxlYudz-368eyyrAdGuW_N5vbt_Y5DhZUmFlHMR-bvW_2rnU3Ixrf5weLOhYvvzRtzHeoB7YCSKzkijBp8jmYQnnbA6gIwe7Al848xyMHf5TsC6wwE64i1S-cIvPbFqbPfMXaDIWE6MTGkyiM_QFVF9F0YMbMyLxvu2iEyJMlBWL_oJbBjEpmFfHMPpFFrCUYbEYL7CZPWIht5cmGUFfK4ew"/>
+<div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-10">
+<span class="font-label-caps text-label-caps text-secondary mb-2">HOSPITALITY</span>
+<h4 class="font-headline-md text-headline-md text-white">Horizon Terrace</h4>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-section-gap px-6 bg-surface-container-lowest border-y border-zinc-900 overflow-hidden relative">
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-secondary/5 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="max-w-4xl mx-auto text-center relative z-10">
+<h2 class="font-display-xl text-display-xl text-white mb-8">Design Beyond Limits</h2>
+<p class="font-body-lg text-body-lg text-zinc-400 mb-12">
+                    Every space tells a story. Let's make yours extraordinary. Our design team is ready to bring your vision to life with unparalleled precision.
+                </p>
+<button class="relative group px-12 py-5 bg-black border border-secondary text-secondary font-label-caps text-label-caps overflow-hidden transition-all duration-300 hover:text-black hover:bg-secondary active:scale-95 animate-pulse">
+<span class="relative z-10">Have a Project in Mind?</span>
+<div class="absolute inset-0 bg-secondary translate-y-full group-hover:translate-y-0 transition-transform duration-300 -z-0"></div>
+</button>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="w-full flex flex-col items-center gap-8 px-10 py-20 bg-[#0A0A0A] border-t border-zinc-900">
+<div class="text-yellow-500 font-black text-xl">LUMINA INTERIORS</div>
+<div class="flex flex-wrap justify-center gap-10">
+<a class="font-serif text-xs tracking-widest text-zinc-600 hover:text-yellow-400 transition-all duration-300" href="#">Privacy Policy</a>
+<a class="font-serif text-xs tracking-widest text-zinc-600 hover:text-yellow-400 transition-all duration-300" href="#">Terms of Service</a>
+<a class="font-serif text-xs tracking-widest text-zinc-600 hover:text-yellow-400 transition-all duration-300" href="#">FAQ</a>
+</div>
+<div class="font-serif text-xs tracking-widest text-zinc-500 text-center uppercase">
+            © 2024 LUMINA INTERIORS. CRAFTING ARCHITECTURAL EXCELLENCE.
+        </div>
+<div class="flex gap-6 mt-4">
+<a class="text-zinc-600 hover:text-yellow-500 transition-colors" href="#"><span class="material-symbols-outlined" data-icon="share">share</span></a>
+<a class="text-zinc-600 hover:text-yellow-500 transition-colors" href="#"><span class="material-symbols-outlined" data-icon="public">public</span></a>
+<a class="text-zinc-600 hover:text-yellow-500 transition-colors" href="#"><span class="material-symbols-outlined" data-icon="mail">mail</span></a>
+</div>
+</footer>
+<!-- Side Navigation Drawer (Hidden by default) -->
+<aside class="fixed inset-y-0 right-0 z-[60] flex flex-col p-10 bg-[#0A0A0A] w-80 h-screen border-l border-zinc-800 shadow-2xl translate-x-full opacity-0 pointer-events-none transition-all duration-500">
+<div class="flex justify-between items-center mb-16">
+<div class="text-white font-bold tracking-widest uppercase">LUMINA INTERIORS</div>
+<span class="material-symbols-outlined text-zinc-500 cursor-pointer hover:text-white" data-icon="close">close</span>
+</div>
+<div class="flex flex-col gap-6">
+<a class="font-serif text-lg uppercase tracking-widest text-zinc-500 hover:text-white hover:bg-zinc-900 p-2 transition-all" href="#">About Us</a>
+<a class="font-serif text-lg uppercase tracking-widest text-zinc-500 hover:text-white hover:bg-zinc-900 p-2 transition-all" href="#">Services</a>
+<a class="font-serif text-lg uppercase tracking-widest text-yellow-500 font-bold underline decoration-2 underline-offset-8 p-2" href="#">Portfolio</a>
+<a class="font-serif text-lg uppercase tracking-widest text-zinc-500 hover:text-white hover:bg-zinc-900 p-2 transition-all" href="#">Design Gallery</a>
+<a class="font-serif text-lg uppercase tracking-widest text-zinc-500 hover:text-white hover:bg-zinc-900 p-2 transition-all" href="#">How It Works</a>
+<a class="font-serif text-lg uppercase tracking-widest text-zinc-500 hover:text-white hover:bg-zinc-900 p-2 transition-all" href="#">Team</a>
+<a class="font-serif text-lg uppercase tracking-widest text-zinc-500 hover:text-white hover:bg-zinc-900 p-2 transition-all" href="#">Contact Us</a>
+<a class="font-serif text-lg uppercase tracking-widest text-zinc-500 hover:text-white hover:bg-zinc-900 p-2 transition-all" href="#">Blog</a>
+</div>
+</aside>
+<!-- Custom Cursor Overlay -->
+<div class="custom-cursor hidden lg:block"></div>
+</body></html>

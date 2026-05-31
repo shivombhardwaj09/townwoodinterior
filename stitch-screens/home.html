@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&amp;family=Inter:wght@300;400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#c4c7c7",
+                    "on-background": "#e5e2e1",
+                    "primary-fixed-dim": "#c9c6c5",
+                    "on-error-container": "#ffdad6",
+                    "on-primary-container": "#7b7977",
+                    "secondary": "#ffd65b",
+                    "surface-variant": "#353434",
+                    "error": "#ffb4ab",
+                    "on-surface": "#e5e2e1",
+                    "tertiary-container": "#0b0a09",
+                    "on-primary": "#313030",
+                    "tertiary-fixed": "#e6e1df",
+                    "surface-container-high": "#2b2a2a",
+                    "inverse-surface": "#e5e2e1",
+                    "secondary-container": "#e7b900",
+                    "surface-container": "#201f1f",
+                    "primary": "#c9c6c5",
+                    "surface-bright": "#3a3939",
+                    "secondary-fixed-dim": "#f0c110",
+                    "error-container": "#93000a",
+                    "on-error": "#690005",
+                    "on-tertiary-fixed": "#1d1b1a",
+                    "on-secondary-fixed": "#241a00",
+                    "primary-container": "#0a0a0a",
+                    "surface-dim": "#141313",
+                    "tertiary-fixed-dim": "#cac6c3",
+                    "surface": "#141313",
+                    "outline-variant": "#444748",
+                    "on-tertiary-container": "#7c7977",
+                    "on-primary-fixed": "#1c1b1b",
+                    "surface-container-lowest": "#0e0e0e",
+                    "surface-container-highest": "#353434",
+                    "inverse-primary": "#5f5e5e",
+                    "inverse-on-surface": "#313030",
+                    "on-secondary-container": "#5f4a00",
+                    "on-secondary-fixed-variant": "#584400",
+                    "tertiary": "#cac6c3",
+                    "primary-fixed": "#e5e2e1",
+                    "on-tertiary-fixed-variant": "#484645",
+                    "outline": "#8e9192",
+                    "secondary-fixed": "#ffe08b",
+                    "surface-tint": "#c9c6c5",
+                    "background": "#141313",
+                    "on-tertiary": "#32302f",
+                    "on-primary-fixed-variant": "#474646",
+                    "on-secondary": "#3d2f00",
+                    "surface-container-low": "#1c1b1b"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0rem",
+                    "lg": "0rem",
+                    "xl": "0rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "element-gap": "24px",
+                    "section-gap": "80px",
+                    "unit": "4px",
+                    "container-padding": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Playfair Display"],
+                    "body-md": ["Inter"],
+                    "headline-lg": ["Playfair Display"],
+                    "display-xl": ["Playfair Display"],
+                    "label-caps": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "ghost-text": ["Playfair Display"]
+            },
+            "fontSize": {
+                    "headline-md": ["28px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["40px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                    "display-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "300"}],
+                    "ghost-text": ["120px", {"lineHeight": "1", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A;
+            background-image: linear-gradient(#1A1A1A 1px, transparent 1px), linear-gradient(90deg, #1A1A1A 1px, transparent 1px);
+            background-size: 40px 40px;
+            cursor: none;
+        }
+        .custom-cursor {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #ffd65b;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            box-shadow: 0 0 15px rgba(245, 197, 24, 0.15);
+            transition: transform 0.15s ease-out;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-line {
+            height: 1px;
+            background: linear-gradient(to right, #ffd65b, transparent);
+            width: 100px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-background font-body-md overflow-x-hidden selection:bg-secondary selection:text-black">
+<div class="custom-cursor hidden md:block"></div>
+<header class="fixed top-0 w-full flex justify-between items-center px-6 py-4 bg-black/90 backdrop-blur-lg z-50 border-b border-zinc-800 shadow-[0_0_15px_rgba(245,197,24,0.05)]">
+<div class="text-2xl font-black tracking-tighter text-white uppercase">LUMINA</div>
+<nav class="hidden md:flex gap-10">
+<a class="font-serif uppercase tracking-widest text-sm text-yellow-500 border-b-2 border-yellow-500 transition-colors duration-300" href="#">Home</a>
+<a class="font-serif uppercase tracking-widest text-sm text-zinc-400 hover:text-yellow-400 transition-colors duration-300" href="#">About Us</a>
+<a class="font-serif uppercase tracking-widest text-sm text-zinc-400 hover:text-yellow-400 transition-colors duration-300" href="#">Services</a>
+<a class="font-serif uppercase tracking-widest text-sm text-zinc-400 hover:text-yellow-400 transition-colors duration-300" href="#">Portfolio</a>
+</nav>
+<button class="bg-primary-container text-yellow-500 font-serif uppercase tracking-widest text-sm px-6 py-2 border border-yellow-500 hover:bg-yellow-500 hover:text-black transition-all duration-300 active:scale-95">
+            GET FREE ESTIMATE
+        </button>
+</header>
+<main>
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Luxury interior" class="w-full h-full object-cover scale-110 brightness-[0.4]" data-alt="Ultra-modern minimalist living room with high ceilings, large windows overlooking a city skyline at dusk, moody atmospheric lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoXU-u6BxEImUF4yPaYLg8CJA92mfuiBYctb4BzN1NkqFDVLt0mVxSWuBw9bux_movn83loDxdX_GMDJudXnY-jFcEoMwcCsXm1cwhw6FXXA_XhfxLrvaUK_Yl0f-6lX9vS1V3NnRXoeyqzPTosvROI2TKdKV2Z0BGc_NApZ_5dAxLTc2Am5S8Na4dAHjwK3OuL_RQj0dj0zL4uui4ZF4S6Tg43E2fDsrdljPERXNpmStQKCEgQhZFsE4O0omSZu7GoxeC2dxMjQ"/>
+</div>
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<div class="h-full w-full bg-[radial-gradient(#ffd65b_1px,transparent_1px)] [background-size:20px_20px]"></div>
+</div>
+<div class="relative z-10 text-center px-4">
+<span class="font-label-caps text-secondary mb-4 block tracking-[0.4em] uppercase">Est. 1998</span>
+<h1 class="font-display-xl text-white max-w-4xl mx-auto mb-8 leading-tight">
+                    Crafting Spaces, <br/> <span class="italic font-light">Defining Lifestyles</span>
+</h1>
+<div class="flex flex-col md:flex-row items-center justify-center gap-6">
+<button class="px-10 py-4 bg-white text-black font-label-caps tracking-widest hover:bg-secondary transition-colors duration-500">
+                        EXPLORE PORTFOLIO
+                    </button>
+<div class="flex items-center gap-4 text-zinc-400">
+<div class="editorial-line"></div>
+<span class="font-label-caps">PRIVATE RESIDENCES</span>
+</div>
+</div>
+</div>
+<div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 animate-bounce">
+<span class="font-label-caps text-xs text-zinc-500 vertical-text [writing-mode:vertical-rl]">SCROLL</span>
+<span class="material-symbols-outlined text-secondary">expand_more</span>
+</div>
+</section>
+<section class="py-section-gap px-container-padding bg-surface">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+<div class="md:col-span-5 relative">
+<div class="absolute -top-10 -left-10 text-ghost-text font-ghost-text text-zinc-900 pointer-events-none select-none">
+                            LMN
+                        </div>
+<img alt="Designer portrait" class="w-full h-[600px] object-cover relative z-10 grayscale hover:grayscale-0 transition-all duration-700" data-alt="Elegant close-up of high-end interior textures including marble, brass, and velvet in a sophisticated dark palette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnCC6xy4qFS3z12_d7YPBVXSoDycD6K78SIsCgDEeuEve3VBT9HEknr0EaN6E7euSSXKSZojG75gMyHNvMqaMO7dDzMVwvQJKYDdJblSN67XFRJOWhmSyCN2y88U_VJ8DNt_jaWSwssSk-glHtKPHkxtHXjzl4fNVqe0x_oqgssja_J1qA1RvViT5B4VTKvCoLMiicmr8JBBV5TA6rexyjtyKwQUCV13qtSM562eMKEDzeMZFIMczMzPH3hIPZGz4YgIAi59RvgA"/>
+<div class="absolute bottom-0 right-0 p-8 bg-black/80 backdrop-blur-md z-20 translate-x-10 translate-y-10 border border-zinc-800">
+<span class="font-display-xl text-secondary">25+</span>
+<p class="font-label-caps text-white">Years of Excellence</p>
+</div>
+</div>
+<div class="md:col-span-7">
+<span class="font-label-caps text-secondary mb-4 block uppercase tracking-widest">About Us</span>
+<h2 class="font-headline-lg text-white mb-8">Redefining the <span class="italic">Art of Living</span> through meticulous design.</h2>
+<p class="font-body-lg text-zinc-400 mb-10 leading-relaxed">
+                            LUMINA is more than an interior design firm. We are curators of experience, architects of atmosphere, and believers that your space should be a visceral extension of your identity. Our approach blends brutalist structural honesty with artisanal softness.
+                        </p>
+<div class="grid grid-cols-2 gap-8 mb-12">
+<div>
+<h4 class="text-white font-headline-md mb-2">Bespoke</h4>
+<p class="text-zinc-500 font-body-md">Tailored specifically to the client's movement and lifestyle.</p>
+</div>
+<div>
+<h4 class="text-white font-headline-md mb-2">Timeless</h4>
+<p class="text-zinc-500 font-body-md">Design that ignores trends in favor of enduring architectural value.</p>
+</div>
+</div>
+<a class="inline-flex items-center gap-4 group" href="#">
+<span class="font-label-caps text-white group-hover:text-secondary transition-colors">READ OUR STORY</span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-2 transition-transform">arrow_right_alt</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<section class="py-section-gap px-container-padding">
+<div class="max-w-7xl mx-auto">
+<div class="flex justify-between items-end mb-16">
+<div>
+<span class="font-label-caps text-secondary mb-4 block uppercase tracking-widest">Selected Works</span>
+<h2 class="font-headline-lg text-white">Featured Projects</h2>
+</div>
+<div class="flex gap-4">
+<button class="p-4 border border-zinc-800 text-white hover:border-secondary transition-colors">
+<span class="material-symbols-outlined">west</span>
+</button>
+<button class="p-4 bg-secondary text-black hover:bg-white transition-colors">
+<span class="material-symbols-outlined">east</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="group cursor-pointer">
+<div class="overflow-hidden mb-6 aspect-[4/5]">
+<img alt="Project 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Modernist luxury penthouse living area with dark wood panels and floor-to-ceiling windows showing city lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcSCFsb9Qwl55iXzhqJixVUfAr3uk8CEI15D-g0Bv6o1QeZVPf9A-I7ky8920fBpGNWKtmw9pfZGZ4VNbKegZ8eaAW9b4HNH-OjziBO68TvNTw3N-Kt8Qv7tSc1HCiSVpOYNSmvl4pyToJzOg4KgVIbZ4mR7yjwGBuJYs8vx30amP6lRJDlNG7T8yGBxqC2AdOfg3K3fNhB41gVQ3Z0l4H_lGupfCjNqEa6E4WTxJzh2sBmcp9aUMDU5SheVWlkJvedipHFF7KcA"/>
+</div>
+<p class="font-label-caps text-zinc-500 mb-2">RESIDENTIAL | LONDON</p>
+<h3 class="font-headline-md text-white group-hover:text-secondary transition-colors">The Obsidian Penthouse</h3>
+</div>
+<div class="group cursor-pointer mt-12">
+<div class="overflow-hidden mb-6 aspect-[4/5]">
+<img alt="Project 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Minimalist contemporary kitchen with dark marble island and matte black cabinetry in soft moody light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4uoyTodYvV3hPQLuALjKqmtRRR5QgtVtj6kfutDYcdaqIkCS6x7YVJIEzbA2gOdCJxtGyd9rMfH5kJge0ZTiU9DIHJHvdsgW4bnwk6aoaE8aaGT9GOuOMn6mxDEOR9uVcUwRSTtidt45tGefFxHFb1HOgOPaDleTeoswlNKZ_DIIqs7N80HTpzQPksaB2zPESyX9CHgCJSqnfbF6Jesgl16J9yF1pyhnjs9ur0X8cu_XDZdgFcV3Cw2u6MouZ_oWZlQlGHvB95Q"/>
+</div>
+<p class="font-label-caps text-zinc-500 mb-2">COMMERCIAL | MILAN</p>
+<h3 class="font-headline-md text-white group-hover:text-secondary transition-colors">Aurelius Concept Store</h3>
+</div>
+<div class="group cursor-pointer">
+<div class="overflow-hidden mb-6 aspect-[4/5]">
+<img alt="Project 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="Luxurious master bedroom with velvet textures, ambient hidden lighting, and architectural concrete walls" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAV8HqsWxGet9ek70e2tvwQDoF2d3qagb53OPMnjk1hzZSNL4U5ifnWktLi5qS-vymg6vxwoOpbxCzs9LARHd0Kh8ymy5seuHOc6IfOwqpthGUeRRZkU6DmVJuSp4mSJbYExa05hc-Ds9P1Z953ArUpns8uLfvvT0_FHLYPywbQ2sPj-C3wGvCViEiURa9kDZyA70-49_rnN9ARF_m5vADCqDzK8SQ-o0ttXhKQp01IXlnD55MCwbfqYTpAm6JM1JKUKa4B_2Fu2Q"/>
+</div>
+<p class="font-label-caps text-zinc-500 mb-2">HOSPITALITY | DUBAI</p>
+<h3 class="font-headline-md text-white group-hover:text-secondary transition-colors">The Zenith Suite</h3>
+</div>
+</div>
+</div>
+</section>
+<section class="py-section-gap px-container-padding bg-surface-container-low relative overflow-hidden">
+<div class="absolute top-0 right-0 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-[400px]">format_quote</span>
+</div>
+<div class="max-w-5xl mx-auto text-center relative z-10">
+<div class="text-secondary mb-10">
+<span class="material-symbols-outlined text-6xl" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+</div>
+<h2 class="font-headline-lg text-white mb-12 italic leading-relaxed">
+                    "LUMINA transformed our vision into a physical reality that far exceeded our expectations. Every detail, from the choice of stone to the light temperature, was executed with surgical precision."
+                </h2>
+<div class="flex flex-col items-center">
+<div class="w-16 h-16 rounded-full overflow-hidden mb-4 border border-secondary">
+<img alt="Client" class="w-full h-full object-cover" data-alt="Close-up portrait of a sophisticated man in his 40s looking confident, studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOC6qp2TGtUhfgshuw_V_HHEyyO8CtRtZv6sw75IJKA1HqFPQz1UiMIixYB0ikG7uYurBkB0ITQYHTvOflgOBw7IhImx5nhx1JKS4-QI_3rWO2h5FX4v4MvzuPprkHPRk4SJzFHwyq6baJAfZlcIMTc2fnKHv-ic99qY5LEfpImuhlprCvEKMQhqBiRHkdIJ-8B9IMQ0Vylgdkb3mhttGU3qglhwZu0X5sKp_ZhspnpUFDbIa298GKxvqsvWLooVUrUmvgL6Tacg"/>
+</div>
+<p class="font-label-caps text-white">Alexander Voss</p>
+<p class="font-body-md text-zinc-500">CEO, Voss Global</p>
+</div>
+</div>
+</section>
+<section class="py-section-gap px-container-padding">
+<div class="max-w-7xl mx-auto bg-primary-container border border-zinc-800 p-12 md:p-24 text-center">
+<span class="font-label-caps text-secondary mb-6 block uppercase tracking-[0.3em]">Next Steps</span>
+<h2 class="font-display-xl text-white mb-10">Ready to Elevate Your Space?</h2>
+<div class="flex flex-col md:flex-row gap-6 justify-center">
+<input class="bg-transparent border-b-2 border-zinc-800 text-white font-body-lg px-4 py-3 focus:outline-none focus:border-secondary transition-colors w-full md:w-96" placeholder="Your Email Address" type="email"/>
+<button class="bg-secondary text-black font-label-caps px-12 py-4 hover:bg-white transition-colors duration-500">
+                        START CONSULTATION
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<footer class="w-full flex flex-col items-center gap-8 px-10 py-20 bg-[#0A0A0A] border-t border-zinc-900">
+<div class="text-yellow-500 font-black text-xl tracking-tighter uppercase">LUMINA INTERIORS</div>
+<div class="flex flex-wrap justify-center gap-12 text-zinc-400 font-serif text-sm tracking-widest">
+<a class="hover:text-yellow-400 hover:shadow-[0_0_10px_rgba(245,197,24,0.3)] transition-all" href="#">ABOUT</a>
+<a class="hover:text-yellow-400 hover:shadow-[0_0_10px_rgba(245,197,24,0.3)] transition-all" href="#">SERVICES</a>
+<a class="hover:text-yellow-400 hover:shadow-[0_0_10px_rgba(245,197,24,0.3)] transition-all" href="#">PORTFOLIO</a>
+<a class="hover:text-yellow-400 hover:shadow-[0_0_10px_rgba(245,197,24,0.3)] transition-all" href="#">CONTACT</a>
+</div>
+<div class="flex gap-6 mt-4">
+<a class="w-10 h-10 flex items-center justify-center border border-zinc-800 rounded-full text-zinc-500 hover:border-secondary hover:text-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-lg">camera</span>
+</a>
+<a class="w-10 h-10 flex items-center justify-center border border-zinc-800 rounded-full text-zinc-500 hover:border-secondary hover:text-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-lg">public</span>
+</a>
+<a class="w-10 h-10 flex items-center justify-center border border-zinc-800 rounded-full text-zinc-500 hover:border-secondary hover:text-secondary transition-all" href="#">
+<span class="material-symbols-outlined text-lg">mail</span>
+</a>
+</div>
+<div class="flex flex-col md:flex-row items-center gap-8 mt-12 w-full justify-between">
+<p class="font-serif text-xs tracking-widest text-zinc-500">© 2024 LUMINA INTERIORS. CRAFTING ARCHITECTURAL EXCELLENCE.</p>
+<div class="flex gap-8 text-zinc-600 font-serif text-xs tracking-widest">
+<a class="hover:text-yellow-500 transition-all" href="#">Privacy Policy</a>
+<a class="hover:text-yellow-500 transition-all" href="#">Terms of Service</a>
+<a class="hover:text-yellow-500 transition-all" href="#">FAQ</a>
+</div>
+</div>
+</footer>
+<aside class="fixed inset-y-0 right-0 z-[60] flex flex-col p-10 bg-[#0A0A0A] h-screen w-80 border-l border-zinc-800 shadow-2xl translate-x-full">
+<div class="flex justify-between items-center mb-16">
+<span class="text-white font-bold tracking-widest">MENU</span>
+<button class="text-white hover:text-secondary">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<nav class="flex flex-col gap-8">
+<a class="font-serif text-lg uppercase tracking-widest text-zinc-500 hover:bg-zinc-900 transition-all p-2" href="#">About Us</a>
+<a class="font-serif text-lg uppercase tracking-widest text-zinc-500 hover:bg-zinc-900 transition-all p-2" href="#">Services</a>
+<a class="font-serif text-lg uppercase tracking-widest text-zinc-500 hover:bg-zinc-900 transition-all p-2" href="#">Portfolio</a>
+<a class="font-serif text-lg uppercase tracking-widest text-zinc-500 hover:bg-zinc-900 transition-all p-2" href="#">Design Gallery</a>
+<a class="font-serif text-lg uppercase tracking-widest text-zinc-500 hover:bg-zinc-900 transition-all p-2" href="#">How It Works</a>
+<a class="font-serif text-lg uppercase tracking-widest text-zinc-500 hover:bg-zinc-900 transition-all p-2" href="#">Team</a>
+<a class="font-serif text-lg uppercase tracking-widest text-zinc-500 hover:bg-zinc-900 transition-all p-2" href="#">Contact Us</a>
+<a class="font-serif text-lg uppercase tracking-widest text-zinc-500 hover:bg-zinc-900 transition-all p-2" href="#">Blog</a>
+</nav>
+</aside>
+</body></html>

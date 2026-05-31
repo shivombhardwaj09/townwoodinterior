@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&amp;family=Inter:wght@300;400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-surface-variant": "#c4c7c7",
+            "on-background": "#e5e2e1",
+            "primary-fixed-dim": "#c9c6c5",
+            "on-error-container": "#ffdad6",
+            "on-primary-container": "#7b7979",
+            "secondary": "#ffd65b",
+            "surface-variant": "#353434",
+            "error": "#ffb4ab",
+            "on-surface": "#e5e2e1",
+            "tertiary-container": "#0b0a09",
+            "on-primary": "#313030",
+            "tertiary-fixed": "#e6e1df",
+            "surface-container-high": "#2b2a2a",
+            "inverse-surface": "#e5e2e1",
+            "secondary-container": "#e7b900",
+            "surface-container": "#201f1f",
+            "primary": "#c9c6c5",
+            "surface-bright": "#3a3939",
+            "secondary-fixed-dim": "#f0c110",
+            "error-container": "#93000a",
+            "on-error": "#690005",
+            "on-tertiary-fixed": "#1d1b1a",
+            "on-secondary-fixed": "#241a00",
+            "primary-container": "#0a0a0a",
+            "surface-dim": "#141313",
+            "tertiary-fixed-dim": "#cac6c3",
+            "surface": "#141313",
+            "outline-variant": "#444748",
+            "on-tertiary-container": "#7c7977",
+            "on-primary-fixed": "#1c1b1b",
+            "surface-container-lowest": "#0e0e0e",
+            "surface-container-highest": "#353434",
+            "inverse-primary": "#5f5e5e",
+            "inverse-on-surface": "#313030",
+            "on-secondary-container": "#5f4a00",
+            "on-secondary-fixed-variant": "#584400",
+            "tertiary": "#cac6c3",
+            "primary-fixed": "#e5e2e1",
+            "on-tertiary-fixed-variant": "#484645",
+            "outline": "#8e9192",
+            "secondary-fixed": "#ffe08b",
+            "surface-tint": "#c9c6c5",
+            "background": "#141313",
+            "on-tertiary": "#32302f",
+            "on-primary-fixed-variant": "#474646",
+            "on-secondary": "#3d2f00",
+            "surface-container-low": "#1c1b1b"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "16px",
+            "element-gap": "24px",
+            "section-gap": "80px",
+            "unit": "4px",
+            "container-padding": "24px"
+          },
+          "fontFamily": {
+            "headline-md": ["Playfair Display"],
+            "body-md": ["Inter"],
+            "headline-lg": ["Playfair Display"],
+            "display-xl": ["Playfair Display"],
+            "label-caps": ["Inter"],
+            "body-lg": ["Inter"],
+            "ghost-text": ["Playfair Display"]
+          },
+          "fontSize": {
+            "headline-md": ["28px", {"lineHeight": "1.3", "fontWeight": "400"}],
+            "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+            "headline-lg": ["40px", {"lineHeight": "1.2", "fontWeight": "400"}],
+            "display-xl": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+            "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "600"}],
+            "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0.01em", "fontWeight": "300"}],
+            "ghost-text": ["120px", {"lineHeight": "1", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #0A0A0A;
+      background-image: linear-gradient(#1A1A1A 1px, transparent 1px), linear-gradient(90deg, #1A1A1A 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .custom-cursor {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: #f5c518;
+      mix-blend-mode: difference;
+      z-index: 9999;
+      transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    }
+    .interactive:hover ~ .custom-cursor {
+      transform: scale(3);
+      box-shadow: 0 0 15px rgba(245, 197, 24, 0.4);
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-on-background selection:bg-secondary selection:text-on-secondary">
+<!-- Header -->
+<header class="fixed top-0 w-full flex justify-between items-center px-6 py-4 bg-black/90 backdrop-blur-lg border-b border-zinc-800 z-50 shadow-[0_0_15px_rgba(245,197,24,0.05)]">
+<div class="text-2xl font-black tracking-tighter text-white">LUMINA</div>
+<nav class="hidden md:flex gap-12 items-center">
+<a class="font-serif uppercase tracking-widest text-sm text-zinc-400 hover:text-yellow-400 transition-colors duration-300" href="#">About Us</a>
+<a class="font-serif uppercase tracking-widest text-sm text-zinc-400 hover:text-yellow-400 transition-colors duration-300" href="#">Services</a>
+<a class="font-serif uppercase tracking-widest text-sm text-zinc-400 hover:text-yellow-400 transition-colors duration-300" href="#">Portfolio</a>
+<a class="font-serif uppercase tracking-widest text-sm text-yellow-500 border-b-2 border-yellow-500" href="#">Contact Us</a>
+</nav>
+<button class="bg-secondary text-on-secondary font-label-caps px-6 py-2 transition-all hover:brightness-110 active:scale-95">
+      GET FREE ESTIMATE
+    </button>
+</header>
+<main class="pt-32 pb-section-gap overflow-x-hidden">
+<!-- Hero Section -->
+<section class="relative container mx-auto px-container-padding mb-section-gap">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<div class="md:col-span-8 z-10">
+<span class="font-label-caps text-secondary mb-4 block">GET IN TOUCH</span>
+<h1 class="font-display-xl text-display-xl text-white mb-8">
+            Let's build something <br/>
+<span class="relative inline-block">
+              Beautiful
+              <span class="absolute -bottom-2 left-0 w-full h-[6px] bg-secondary"></span>
+</span>
+            together.
+          </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl">
+            Our atelier specializes in bespoke architectural interiors that define luxury living. Connect with us to begin your journey toward curated excellence.
+          </p>
+</div>
+<div class="hidden md:block md:col-span-4 relative h-[600px] overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover grayscale opacity-60 hover:grayscale-0 transition-all duration-700" data-alt="Modern minimalist living room with floor-to-ceiling windows, dramatic shadows, and high-end marble fireplace in a monochromatic palette" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqHjoTeDzWENyP_w5TLV_elfqNpDHNF6VrG-hPneTQgDCfDsFxnq6i_or4vZ1_K6S-cqvSzXgGQlcmQWrz98FuWpov6WQIfh7x3iN2hEmb9dzXkStJMPXnl4KfQRQu5tuxSLPl_0KogdelDxRGBFfooNWWjMXjo31taKJbbEH2-XJWkjLtn1a7oYt6OZOAWoKCtVWgYTx_uQXaIPq2fgEl2OoyLQaaOHvUG7q8XSp1d2SHWv4ZDOKgj81TgcKEgVUys7sUbOes6g"/>
+</div>
+</div>
+</section>
+<!-- Content Grid -->
+<section class="container mx-auto px-container-padding">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-section-gap">
+<!-- Contact Form Side -->
+<div class="lg:col-span-7 bg-surface-container p-10 border border-zinc-800 shadow-2xl">
+<h2 class="font-headline-lg text-headline-lg text-white mb-10">Inquiry</h2>
+<form class="space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="group">
+<label class="font-label-caps text-on-primary-container block mb-2">FULL NAME</label>
+<input class="w-full bg-transparent border-b border-zinc-800 py-3 text-white focus:outline-none focus:border-secondary focus:ring-0 transition-all placeholder:text-zinc-700" placeholder="John Doe" type="text"/>
+</div>
+<div class="group">
+<label class="font-label-caps text-on-primary-container block mb-2">EMAIL ADDRESS</label>
+<input class="w-full bg-transparent border-b border-zinc-800 py-3 text-white focus:outline-none focus:border-secondary focus:ring-0 transition-all placeholder:text-zinc-700" placeholder="john@example.com" type="email"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="group">
+<label class="font-label-caps text-on-primary-container block mb-2">PHONE</label>
+<input class="w-full bg-transparent border-b border-zinc-800 py-3 text-white focus:outline-none focus:border-secondary focus:ring-0 transition-all placeholder:text-zinc-700" placeholder="+1 234 567 890" type="tel"/>
+</div>
+<div class="group">
+<label class="font-label-caps text-on-primary-container block mb-2">PROJECT TYPE</label>
+<select class="w-full bg-transparent border-b border-zinc-800 py-3 text-white focus:outline-none focus:border-secondary focus:ring-0 transition-all appearance-none cursor-pointer">
+<option class="bg-surface">Residential</option>
+<option class="bg-surface">Commercial</option>
+<option class="bg-surface">Bespoke Furniture</option>
+<option class="bg-surface">Consultation</option>
+</select>
+</div>
+</div>
+<div class="group">
+<label class="font-label-caps text-on-primary-container block mb-2">MESSAGE</label>
+<textarea class="w-full bg-transparent border-b border-zinc-800 py-3 text-white focus:outline-none focus:border-secondary focus:ring-0 transition-all placeholder:text-zinc-700 resize-none" placeholder="Tell us about your vision..." rows="4"></textarea>
+</div>
+<button class="w-full md:w-auto bg-secondary text-on-secondary font-label-caps py-5 px-12 transition-all hover:shadow-[0_0_20px_rgba(245,197,24,0.3)] hover:-translate-y-1 active:translate-y-0 relative overflow-hidden group" type="submit">
+<span class="relative z-10">SEND ENQUIRY</span>
+<div class="absolute inset-0 bg-white/20 scale-0 group-active:scale-150 transition-transform duration-500 rounded-full"></div>
+</button>
+</form>
+</div>
+<!-- Info & Map Side -->
+<div class="lg:col-span-5 flex flex-col gap-12">
+<!-- Contact Cards -->
+<div class="space-y-8">
+<div class="flex items-start gap-6 group">
+<div class="bg-secondary/10 p-4 rounded-lg group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="location_on">location_on</span>
+</div>
+<div>
+<h3 class="font-label-caps text-on-primary-container mb-1">VISIT OUR ATELIER</h3>
+<p class="font-body-md text-white">124 Lexingon Avenue<br/>New York, NY 10016</p>
+</div>
+</div>
+<div class="flex items-start gap-6 group">
+<div class="bg-secondary/10 p-4 rounded-lg group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="call">call</span>
+</div>
+<div>
+<h3 class="font-label-caps text-on-primary-container mb-1">CALL US</h3>
+<p class="font-body-md text-white">+1 (212) 555-0198</p>
+<p class="font-body-md text-zinc-500 text-sm">Mon - Fri, 9am - 6pm</p>
+</div>
+</div>
+<div class="flex items-start gap-6 group">
+<div class="bg-secondary/10 p-4 rounded-lg group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="mail">mail</span>
+</div>
+<div>
+<h3 class="font-label-caps text-on-primary-container mb-1">EMAIL US</h3>
+<p class="font-body-md text-white">studio@lumina-interiors.com</p>
+</div>
+</div>
+</div>
+<!-- Map -->
+<div class="w-full h-80 bg-zinc-900 border border-zinc-800 relative grayscale contrast-125 opacity-80 hover:opacity-100 transition-opacity">
+<div class="absolute inset-0 flex items-center justify-center">
+<!-- Placeholder for actual map embed -->
+<div class="text-zinc-700 text-center">
+<span class="material-symbols-outlined text-6xl block mb-2" data-icon="map">map</span>
+<p class="font-label-caps">Map Visualization: New York</p>
+</div>
+</div>
+<img class="hidden" data-alt="Stylized dark minimalist street map of Midtown Manhattan New York showing Lexington Avenue area" data-location="New York City" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3vKTabKQ0fC_iIdKn8ewTMr4ZkU2IsmKEHgxSghhFLtfUIhjl0xijK5lZSClwyZ1W1IBi76k6VmqZrT9ceFh6_S-PlOJ1qShuSSjydB-yl9oOLJVkkB034LVLaRKA0hfGNc3cKgdz9kjUERJd_LIo8Iflf5KAQ3vG_BCTaufQxNiMhZNFx8sz1LOVK_3OS0HNf22QpUnhPs9uZUatuX9stsNVtoHvX5C2OW1Z2Jh3oFQGywn5Bv4OcoSRshG4aESpUQDHB9N6Ug"/>
+</div>
+<!-- Socials -->
+<div>
+<h3 class="font-label-caps text-zinc-500 mb-6">FOLLOW THE CRAFT</h3>
+<div class="flex gap-6">
+<a class="w-12 h-12 flex items-center justify-center border border-zinc-800 text-zinc-500 hover:text-secondary hover:border-secondary hover:shadow-[0_0_10px_rgba(245,197,24,0.2)] transition-all transform hover:-translate-y-1" href="#">
+<span class="material-symbols-outlined" data-icon="camera">camera</span>
+</a>
+<a class="w-12 h-12 flex items-center justify-center border border-zinc-800 text-zinc-500 hover:text-secondary hover:border-secondary hover:shadow-[0_0_10px_rgba(245,197,24,0.2)] transition-all transform hover:-translate-y-1" href="#">
+<span class="material-symbols-outlined" data-icon="videocam">videocam</span>
+</a>
+<a class="w-12 h-12 flex items-center justify-center border border-zinc-800 text-zinc-500 hover:text-secondary hover:border-secondary hover:shadow-[0_0_10px_rgba(245,197,24,0.2)] transition-all transform hover:-translate-y-1" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full flex flex-col items-center gap-8 px-10 py-20 bg-[#0A0A0A] border-t border-zinc-900">
+<div class="text-yellow-500 font-black text-xl">LUMINA INTERIORS</div>
+<div class="flex gap-8">
+<a class="font-serif text-xs tracking-widest text-zinc-600 hover:text-yellow-400 hover:shadow-[0_0_10px_rgba(245,197,24,0.3)] transition-all duration-300" href="#">Privacy Policy</a>
+<a class="font-serif text-xs tracking-widest text-zinc-600 hover:text-yellow-400 hover:shadow-[0_0_10px_rgba(245,197,24,0.3)] transition-all duration-300" href="#">Terms of Service</a>
+<a class="font-serif text-xs tracking-widest text-zinc-600 hover:text-yellow-400 hover:shadow-[0_0_10px_rgba(245,197,24,0.3)] transition-all duration-300" href="#">FAQ</a>
+</div>
+<p class="font-serif text-xs tracking-widest text-zinc-500 text-center">
+      © 2024 LUMINA INTERIORS. CRAFTING ARCHITECTURAL EXCELLENCE.
+    </p>
+</footer>
+</body></html>
