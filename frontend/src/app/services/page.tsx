@@ -67,7 +67,7 @@ const containerVariants = {
       staggerChildren: 0.15,
     },
   },
-};
+} as const;
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
@@ -76,7 +76,7 @@ const itemVariants = {
     y: 0,
     transition: { type: "spring", stiffness: 50, damping: 20 }
   },
-};
+} as const;
 
 export default function ServicesPage() {
   return (

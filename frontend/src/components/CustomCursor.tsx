@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
       if (cursorRef.current) {
         cursorRef.current.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0) scale(var(--cursor-scale, 1))`;
