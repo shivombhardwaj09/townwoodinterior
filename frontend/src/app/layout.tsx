@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 // import { Playfair_Display, Inter, DM_Sans } from "next/font/google";
 import "./globals.css";
 import FluidBackground from "@/components/FluidBackground";
-import CustomCursor from "@/components/CustomCursor";
 
 // We are replacing next/font with standard CSS variables injected via HTML to prevent Node.js ECONNRESET hangs
 
@@ -26,7 +25,6 @@ export default function RootLayout({
       </head>
       <body className="font-body bg-transparent text-text-primary">
         <FluidBackground />
-        <CustomCursor />
         {children}
       </body>
     </html>
