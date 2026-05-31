@@ -4,6 +4,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { supabase } from "@/config/supabaseClient";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 40 },
@@ -20,7 +22,7 @@ const staggerContainer = {
   },
 };
 
-const projects = [
+const fallbackProjects = [
   {
     title: "Modern Minimalist Villa",
     category: "Residential",
@@ -59,7 +61,40 @@ const projects = [
   }
 ];
 
+interface Project {
+  title: string;
+  category: string;
+  location: string;
+  thumbnail: string;
+}
+
 export default function Portfolio() {
+  const [projects, setProjects] = useState<Project[]>(fallbackProjects);
+
+  useEffect(() => {
+    async function getProjects() {
+      try {
+        const { data, error } = await supabase
+          .from("projects")
+          .select("title, category, location, thumbnail")
+          .order("created_at", { ascending: false });
+
+        if (error) {
+          console.error("Error fetching projects from Supabase:", error.message);
+          return;
+        }
+
+        if (data && data.length > 0) {
+          setProjects(data as Project[]);
+        }
+      } catch (err) {
+        console.error("Unexpected error fetching projects:", err);
+      }
+    }
+
+    getProjects();
+  }, []);
+
   return (
     <main className="min-h-screen bg-transparent overflow-x-hidden selection:bg-accent selection:text-background">
       <Navbar />
