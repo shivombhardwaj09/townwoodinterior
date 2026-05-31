@@ -6,47 +6,24 @@ export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const updateMousePosition = (e: MouseEvent) => {
-      if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0) scale(var(--cursor-scale, 1))`;
+    const handleMouseMove = (e: MouseEvent) => {
+      const el = cursorRef.current;
+      if (el) {
+        el.style.left = `${e.clientX}px`;
+        el.style.top = `${e.clientY}px`;
       }
     };
 
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (
-        target.tagName.toLowerCase() === "a" ||
-        target.tagName.toLowerCase() === "button" ||
-        target.closest("a") ||
-        target.closest("button") ||
-        target.closest(".glass-card")
-      ) {
-        if (cursorRef.current) {
-          cursorRef.current.style.setProperty("--cursor-scale", "1.5");
-          cursorRef.current.style.backgroundColor = "rgba(212, 175, 55, 0.1)";
-        }
-      } else {
-        if (cursorRef.current) {
-          cursorRef.current.style.setProperty("--cursor-scale", "1");
-          cursorRef.current.style.backgroundColor = "transparent";
-        }
-      }
-    };
-
-    window.addEventListener("mousemove", updateMousePosition);
-    window.addEventListener("mouseover", handleMouseOver);
-
+    window.addEventListener("mousemove", handleMouseMove);
     return () => {
-      window.removeEventListener("mousemove", updateMousePosition);
-      window.removeEventListener("mouseover", handleMouseOver);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
   return (
     <div
-      id="cursor"
       ref={cursorRef}
-      className="pointer-events-none"
+      className="fixed w-4 h-4 bg-accent rounded-full pointer-events-none z-[9999] -translate-x-1/2 -translate-y-1/2 transition-all duration-75 ease-out"
     />
   );
 }
