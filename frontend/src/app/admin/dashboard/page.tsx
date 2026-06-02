@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import AdminSidebar from "@/components/AdminSidebar";
 import { motion } from "framer-motion";
 
+import { supabase } from "@/config/supabaseClient";
 import Image from "next/image";
 
 interface Enquiry {
@@ -23,6 +24,24 @@ interface Project {
   category: string;
   location: string;
   thumbnail: string;
+}
+
+interface DBEnquiry {
+  id: number | string;
+  full_name?: string;
+  email?: string;
+  phone?: string;
+  message?: string;
+  status?: string;
+  created_at?: string;
+}
+
+interface DBProject {
+  id: number | string;
+  title?: string;
+  category?: string;
+  location?: string;
+  thumbnail?: string;
 }
 
 function DashboardContent() {
@@ -45,30 +64,51 @@ function DashboardContent() {
 
     const fetchData = async () => {
       setIsLoading(true);
+      setError("");
       try {
         if (tab === "enquiries") {
-          const res = await fetch("http://localhost:5000/api/enquiries", {
-            headers: { Authorization: `Bearer ${token}` }
-          });
-          if (res.status === 401) {
-            localStorage.removeItem("townwood_admin_token");
-            router.push("/admin");
-            return;
-          }
-          if (res.ok) {
-            const data = await res.json();
-            setEnquiries(data);
+          const { data, error: dbError } = await supabase
+            .from("enquiries")
+            .select("*")
+            .order("created_at", { ascending: false });
+
+          if (dbError) throw dbError;
+
+          if (data) {
+            const mappedEnquiries = (data as DBEnquiry[]).map((item: DBEnquiry) => ({
+              _id: item.id?.toString() || item.email || "",
+              name: item.full_name || "",
+              email: item.email || "",
+              phone: item.phone || "",
+              message: item.message || "",
+              status: item.status || "New",
+              createdAt: item.created_at || new Date().toISOString(),
+            }));
+            setEnquiries(mappedEnquiries);
           }
         } else if (tab === "projects") {
-          // Projects are public to read, so we don't strictly need the token, but good practice
-          const res = await fetch("http://localhost:5000/api/projects");
-          if (res.ok) {
-            const data = await res.json();
-            setProjects(data);
+          const { data, error: dbError } = await supabase
+            .from("projects")
+            .select("*")
+            .order("created_at", { ascending: false });
+
+          if (dbError) throw dbError;
+
+          if (data) {
+            const mappedProjects = (data as DBProject[]).map((item: DBProject) => ({
+              _id: item.id?.toString() || item.title || "",
+              title: item.title || "",
+              category: item.category || "",
+              location: item.location || "",
+              thumbnail: item.thumbnail || "",
+            }));
+            setProjects(mappedProjects);
           }
         }
-      } catch {
-        setError("Failed to fetch data from the server.");
+      } catch (err: unknown) {
+        console.error("Dashboard fetch error:", err);
+        const errMsg = err instanceof Error ? err.message : String(err);
+        setError("Failed to fetch data from Supabase: " + errMsg);
       } finally {
         setIsLoading(false);
       }

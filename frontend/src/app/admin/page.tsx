@@ -17,26 +17,17 @@ export default function AdminLogin() {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
+      // Serverless Client-Side authentication using seed credentials
+      if (email === "admin@townwoodinterior.com" && password === "password123") {
         // Save token to localStorage
-        localStorage.setItem("townwood_admin_token", data.token);
+        localStorage.setItem("townwood_admin_token", "townwood_static_admin_token");
         // Redirect to dashboard
         router.push("/admin/dashboard");
       } else {
-        setError(data.message || "Invalid credentials. Please try again.");
+        setError("Invalid credentials. Please try again.");
       }
     } catch {
-      setError("Cannot connect to server. Please ensure the backend is running.");
+      setError("An unexpected error occurred.");
     } finally {
       setIsLoading(false);
     }
