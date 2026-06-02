@@ -1,9 +1,77 @@
+"use client";
+
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Link from "next/link";
 import Image from "next/image";
+import { supabase } from "@/config/supabaseClient";
 
 export default function Home() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: ""
+  });
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("submitting");
+
+    try {
+      // 1. Save data directly inside Supabase 'enquiries' table
+      const { error: dbError } = await supabase
+        .from("enquiries")
+        .insert([
+          {
+            full_name: formData.name,
+            phone: "Not Provided",
+            email: formData.email,
+            city: "Delhi NCR",
+            property_type: "Homepage Connect Form",
+            budget_range: "Consultation Needed",
+            timeline: "Immediate",
+            message: formData.message,
+          }
+        ]);
+
+      if (dbError) {
+        throw dbError;
+      }
+
+      // 2. Also send the email alert via Web3Forms
+      const data = new FormData();
+      data.append("access_key", "acb77626-d621-49fa-ab5f-d227db04dfc0");
+      data.append("name", formData.name);
+      data.append("email", formData.email);
+      data.append("phone", "Not Provided");
+      data.append("message", formData.message);
+      data.append("subject", "New Homepage Connect Inquiry from Townwood Interior Site");
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: data
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setStatus("success");
+        setFormData({ name: "", email: "", message: "" });
+        setTimeout(() => setStatus("idle"), 5000);
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      console.error("Error submitting connect form to Supabase:", err);
+      setStatus("error");
+    }
+  };
+
   return (
     <main className="min-h-screen bg-background overflow-hidden">
       <Navbar />
@@ -186,39 +254,61 @@ export default function Home() {
 
             {/* Contact Form */}
             <div className="glass-card p-8 md:p-10 border border-accent/20 rounded-sm">
-              <form className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block font-label text-xs uppercase tracking-widest text-text-secondary mb-2">Full Name</label>
+                  <label htmlFor="name" className="block font-label text-xs uppercase tracking-widest text-text-secondary mb-2">Full Name *</label>
                   <input 
                     type="text" 
                     id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
                     className="w-full bg-background/50 border border-border px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors"
                     placeholder="Your name"
                   />
                 </div>
                 <div>
-                  <label htmlFor="email" className="block font-label text-xs uppercase tracking-widest text-text-secondary mb-2">Email Address</label>
+                  <label htmlFor="email" className="block font-label text-xs uppercase tracking-widest text-text-secondary mb-2">Email Address *</label>
                   <input 
                     type="email" 
                     id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
                     className="w-full bg-background/50 border border-border px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors"
                     placeholder="you@example.com"
                   />
                 </div>
                 <div>
-                  <label htmlFor="message" className="block font-label text-xs uppercase tracking-widest text-text-secondary mb-2">Message</label>
+                  <label htmlFor="message" className="block font-label text-xs uppercase tracking-widest text-text-secondary mb-2">Message *</label>
                   <textarea 
                     id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
                     rows={4}
                     className="w-full bg-background/50 border border-border px-4 py-3 text-white focus:outline-none focus:border-accent transition-colors resize-none"
                     placeholder="Tell us about your project..."
                   ></textarea>
                 </div>
                 <button 
-                  type="button" 
-                  className="w-full bg-accent text-background font-label uppercase tracking-widest py-4 mt-4 hover:bg-white transition-colors duration-300 flex items-center justify-center gap-2"
+                  type="submit" 
+                  disabled={status === "submitting" || status === "success"}
+                  className={`w-full font-label uppercase tracking-widest py-4 mt-4 transition-colors duration-300 flex items-center justify-center gap-2 border ${
+                    status === "success" 
+                      ? "bg-green-600/20 text-green-500 border-green-600/30" 
+                      : status === "error" 
+                        ? "bg-red-600/20 text-red-500 border-red-600/30" 
+                        : "bg-accent text-background hover:bg-white border-accent"
+                  }`}
                 >
-                  Send Inquiry
+                  {status === "submitting" ? "Sending..." : 
+                   status === "success" ? "Message Sent!" : 
+                   status === "error" ? "Error Sending!" : 
+                   "Send Inquiry"}
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                 </button>
               </form>
