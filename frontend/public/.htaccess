@@ -1,0 +1,15 @@
+# Disable MultiViews to avoid conflicts
+Options -MultiViews
+
+# Turn on Rewrite Engine
+RewriteEngine On
+
+# 1. Explicitly override directory conflicts for admin paths
+RewriteRule ^admin/?$ admin.html [L]
+RewriteRule ^admin/dashboard/?$ admin/dashboard.html [L]
+
+# 2. Support generic clean URLs (e.g. /about to /about.html)
+# If request is not a directory that exists, and a matching .html file exists, rewrite to it
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+RewriteRule ^([^/]+)/?$ $1.html [L]
