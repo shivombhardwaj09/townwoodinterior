@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { supabase } from "@/config/supabaseClient";
 
 const fadeUpVariant = {
   hidden: { opacity: 0, y: 40 },
@@ -23,15 +24,36 @@ export default function Contact() {
     e.preventDefault();
     setStatus("submitting");
 
-    const data = new FormData();
-    data.append("access_key", "acb77626-d621-49fa-ab5f-d227db04dfc0");
-    data.append("name", formData.name);
-    data.append("email", formData.email);
-    data.append("phone", formData.phone);
-    data.append("message", formData.message);
-    data.append("subject", "New Contact Inquiry from Townwood Interior Site");
-
     try {
+      // 1. Save data directly inside Supabase 'enquiries' table
+      const { error: dbError } = await supabase
+        .from("enquiries")
+        .insert([
+          {
+            full_name: formData.name,
+            phone: formData.phone,
+            email: formData.email,
+            city: "Delhi NCR", // Default city for general contact form
+            property_type: "General Inquiry",
+            budget_range: "Consultation Needed",
+            timeline: "Immediate",
+            message: formData.message,
+          }
+        ]);
+
+      if (dbError) {
+        throw dbError;
+      }
+
+      // 2. Also send the email alert via Web3Forms
+      const data = new FormData();
+      data.append("access_key", "acb77626-d621-49fa-ab5f-d227db04dfc0");
+      data.append("name", formData.name);
+      data.append("email", formData.email);
+      data.append("phone", formData.phone);
+      data.append("message", formData.message);
+      data.append("subject", "New Contact Inquiry from Townwood Interior Site");
+
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         body: data
@@ -45,7 +67,8 @@ export default function Contact() {
       } else {
         setStatus("error");
       }
-    } catch {
+    } catch (err) {
+      console.error("Error submitting contact form to Supabase:", err);
       setStatus("error");
     }
   };

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, UploadCloud, CheckCircle2 } from "lucide-react";
+import { supabase } from "@/config/supabaseClient";
 
 interface EstimateModalProps {
   isOpen: boolean;
@@ -34,20 +35,48 @@ export default function EstimateModal({ isOpen, onClose }: EstimateModalProps) {
     formData.append("Flat Configuration", flatConfig);
 
     try {
+      const name = formData.get("name") as string;
+      const phone = formData.get("phone") as string;
+      const email = formData.get("email") as string;
+      const address = formData.get("address") as string;
+      const society = formData.get("society") as string;
+      const message = formData.get("message") as string;
+
+      const fullMessage = `${message || ""}${society ? `\nSociety: ${society}` : ""}${
+        fileName ? `\nFloor Plan File: ${fileName}` : ""
+      }`;
+
+      // 1. Save data directly inside Supabase 'enquiries' table
+      const { error: dbError } = await supabase
+        .from("enquiries")
+        .insert([
+          {
+            full_name: name,
+            phone: phone,
+            email: email,
+            city: address || "Noida",
+            property_type: flatConfig,
+            budget_range: "Consultation Needed",
+            timeline: "Immediate",
+            message: fullMessage,
+          }
+        ]);
+
+      if (dbError) {
+        throw dbError;
+      }
+
+      // 2. Also send the email alert via Web3Forms so you get instant email notifications
       const formServiceEndpoint = ["https://api", "web3forms.com", "submit"].join("/");
       
-      const response = await fetch(formServiceEndpoint, {
+      await fetch(formServiceEndpoint, {
         method: "POST",
         body: formData,
       });
 
-      if (response.ok) {
-        setIsSuccess(true);
-      } else {
-        console.error("Form submission failed");
-      }
+      setIsSuccess(true);
     } catch (error) {
-      console.error("Error submitting form", error);
+      console.error("Error submitting form to Supabase:", error);
     } finally {
       setIsSubmitting(false);
     }
