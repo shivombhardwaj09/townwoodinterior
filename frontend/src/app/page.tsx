@@ -44,28 +44,27 @@ export default function Home() {
         throw dbError;
       }
 
-      // 2. Also send the email alert via Web3Forms
-      const data = new FormData();
-      data.append("access_key", "acb77626-d621-49fa-ab5f-d227db04dfc0");
-      data.append("name", formData.name);
-      data.append("email", formData.email);
-      data.append("phone", "Not Provided");
-      data.append("message", formData.message);
-      data.append("subject", "New Homepage Connect Inquiry from Townwood Interior Site");
+      // 2. Also send the email alert via Web3Forms (non-blocking)
+      try {
+        const data = new FormData();
+        data.append("access_key", "acb77626-d621-49fa-ab5f-d227db04dfc0");
+        data.append("name", formData.name);
+        data.append("email", formData.email);
+        data.append("phone", "Not Provided");
+        data.append("message", formData.message);
+        data.append("subject", "New Homepage Connect Inquiry from Townwood Interior Site");
 
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: data
-      });
-
-      const result = await response.json();
-      if (result.success) {
-        setStatus("success");
-        setFormData({ name: "", email: "", message: "" });
-        setTimeout(() => setStatus("idle"), 5000);
-      } else {
-        setStatus("error");
+        await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: data
+        });
+      } catch (emailErr) {
+        console.warn("Web3Forms notification failed to send:", emailErr);
       }
+
+      setStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+      setTimeout(() => setStatus("idle"), 5000);
     } catch (err) {
       console.error("Error submitting connect form to Supabase:", err);
       setStatus("error");
